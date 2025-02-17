@@ -23,8 +23,8 @@ To include this script in launch file with specified param
 ```
 
 ### Notes
-1. Run `plot_frequency` and press `Ctrl+C` after some time and AUV motion to plot frequency domain sensor signal
-2. Run `plot.launch` to evaluate, visualize and compare different filters' performance. Press `Ctrl+C` after some time and AUV motion to print metrics, save plots to `image_plots`
+1. Run `plot_frequency` and press `Ctrl+C` after some time & AUV motion to plot frequency domain sensor signal
+2. Run `plot.launch` to evaluate, visualize and compare different filters' performance. Press `Ctrl+C` after some time & AUV motion to print metrics & save plots to `image_plots`
 3. Inspect `plot.launch` to include desired filter for testing
 4. SNR & Lag printed on console by `plot.launch` may not be very accurate due to inconsistent sampling rate/missing data, but it is still reliable.
 5. Run `plot.launch` before playing Unity Scene to prevent data loss and increase metrics accuracy. 
