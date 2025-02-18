@@ -100,16 +100,18 @@ Subscribes to clean, noisy, & multiple filtered signal topic to evaluate and vis
 - `interval` (default `0.3`): Interval to check available filtered topics
 - `fs` (default `33`): sampling rate of all topics
 - `plot_aligned_filtered_signal` (default `False`): Plot the aligned filtered signal with compensated lag on the same graph (mainly for debug use)
+- `plots_dir` (default `image_plots`): The save directory of plots, relative to the package path e.g. `/path/to/sensor_noise_filter/image_plots`
 ### Usage
-rosrun (optional param specification at the end), press `Ctrl+C` after some time (for data collection) to end the script and show frequency plot.
+rosrun (optional param specification at the end), press `Ctrl+C` after some time (for data collection) to end the script, show metrics & save plots.
 ```
-rosrun sensor_noise_filter plot_frequency.py _input_sensor_topic:="/imu" _fs:=50
+rosrun sensor_noise_filter plot_dvl.py _prefix:="/sensor/imu/filtered"
 ```
 roslaunch: use [`plot.launch`](#plotlaunch)
 
 ### `plot.launch`
 Run `plot_dvl.py` & filter script(s) at the same time to evaluate, visualize and compare the performance of different filters in the same graph. Inspect `plot.launch` to include desired filters for comparison.
 ### Usage
+Run command below and press `Ctrl+C` after some time (for data collection) to show metrics, save plots & shutdown ROS. 
 ```
 roslaunch sensor_noise_filter plot.launch
 ```
