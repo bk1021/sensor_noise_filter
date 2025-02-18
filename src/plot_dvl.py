@@ -81,7 +81,7 @@ def monitor_filtered_topics(event):
     global active_filtered_topics
     topic_list = rospy.get_published_topics()
     for topic_name, topic_type in topic_list:
-        if topic_name.startswith("/sensor/dvl_filtered") and topic_name not in active_filtered_topics:
+        if topic_name.startswith(filtered_topic_prefix) and topic_name not in active_filtered_topics:
             active_filtered_topics.add(topic_name)
             rospy.Subscriber(topic_name, TwistStamped, generate_filtered_callback(topic_name))
             rospy.loginfo(f"Subscribed to new topic: {topic_name}")
@@ -254,9 +254,14 @@ if __name__ == "__main__":
     rospy.on_shutdown(shutdown_hook)
     try:
         rospy.init_node("dvl_plotter", anonymous=True)
-        rospy.Subscriber("/sensor/dvl", TwistStamped, dvl_callback)
-        rospy.Subscriber("/sensor/dvl_clean", TwistStamped, clean_dvl_callback)
-        rospy.Timer(rospy.Duration(0.3), monitor_filtered_topics)
+        clean_sensor_topic = rospy.get_param("~clean_sensor_topic", "/sensor/dvl_clean")
+        noisy_sensor_topic = rospy.get_param("~noisy_sensor_topic", "/sensor/dvl")
+        monitor_filtered_topics_interval = rospy.get_param("~interval", 0.3)
+        filtered_topic_prefix = rospy.get_param("~prefix", "/sensor/dvl_filtered")
+        
+        rospy.Subscriber(noisy_sensor_topic, TwistStamped, dvl_callback)
+        rospy.Subscriber(clean_sensor_topic, TwistStamped, clean_dvl_callback)
+        rospy.Timer(rospy.Duration(monitor_filtered_topics_interval), monitor_filtered_topics)
         rospy.spin()
     except rospy.ROSInterruptException:
         pass
