@@ -59,9 +59,9 @@ Butterworth filter is a low pass filter, eliminating high frequency gaussian noi
 ### ⚙️ Parameter
 - `input_sensor_topic` (default `"/sensor/dvl"`)
 - `output_sensor_topic` (default `"/sensor/dvl_filtered"`)
-- `cutoff` (default `10`)
-- `fs` (default `33`)
-- `order` (default `4`)
+- `cutoff` (default `10`): Cutoff frequency
+- `fs` (default `33`): Sampling rate of sensor in Hz
+- `order` (default `4`): Butterworth filter's order
 ### ▶️ Usage
 rosrun (optional param specification at the end)
 ```
@@ -77,7 +77,7 @@ roslaunch with param specification, add this node to your launch file
   <param name="order" value="4" />
 </node>
 ```
-> 💡**NOTE:** Run [plot_frequency.py](#plot_frequencypy) to determine an appropriate cutoff frequency.
+> 💡**NOTE:** Run [plot_frequency.py](#plot_frequencypy) to determine an appropriate `cutoff`, run ```rostopic hz /sensor/dvl``` to determine appropriate `fs`.
 
 ## Signal Visualization
 
