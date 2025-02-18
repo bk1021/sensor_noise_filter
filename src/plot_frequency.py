@@ -65,11 +65,13 @@ if __name__ == "__main__":
         velocity_x_buffer = deque(maxlen=BUFFER_SIZE)
         velocity_y_buffer = deque(maxlen=BUFFER_SIZE)
         velocity_z_buffer = deque(maxlen=BUFFER_SIZE)
+        input_sensor_topic = rospy.get_param("~input_sensor_topic", "/sensor/dvl")
+        fs = rospy.get_param("~fs", 33)
 
         rospy.init_node("frequency_plotter", anonymous=True)
-        rospy.Subscriber("/sensor/dvl", TwistStamped, dvl_callback)
+        rospy.Subscriber(input_sensor_topic, TwistStamped, dvl_callback)
         rospy.spin()
     except rospy.ROSInterruptException():
         pass
     finally:
-        plot_frequency(fs=33)
+        plot_frequency(fs)
