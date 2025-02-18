@@ -77,7 +77,7 @@ roslaunch with param specification, add this node to your launch file
   <param name="order" value="4" />
 </node>
 ```
-> NOTE: Run [plot_frequency.py](#plotfrequency) to determine an appropriate cutoff frequency.
+> NOTE: Run [plot_frequency.py](#plotfrequencypy) to determine an appropriate cutoff frequency.
 
 ## Signal Visualization
 
