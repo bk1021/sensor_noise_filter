@@ -86,7 +86,7 @@ def monitor_filtered_topics(event):
             rospy.Subscriber(topic_name, TwistStamped, generate_filtered_callback(topic_name))
             rospy.loginfo(f"Subscribed to new topic: {topic_name}")
 
-def plot_and_evaluate_signals(fs, plot_aligned_filtered_signal=False):
+def plot_and_evaluate_signals(fs, plot_aligned_filtered_signal=False, plots_dir="image_plots"):
     # Convert buffers to numpy arrays
     time_noisy = np.array(list(time_noisy_buffer))
     time_clean = np.array(list(time_clean_buffer))
@@ -180,7 +180,7 @@ def plot_and_evaluate_signals(fs, plot_aligned_filtered_signal=False):
     plt.tight_layout()
     rospack = rospkg.RosPack()
     package_path = rospack.get_path("sensor_noise_filter")
-    save_dir = os.path.join(package_path, "image_plots")
+    save_dir = os.path.join(package_path, plots_dir)
     os.makedirs(save_dir, exist_ok=True)
     filename = f"dvl_velocity_plot_{datetime.now(timezone(timedelta(hours=8))).strftime('%Y%m%d_%H%M%S')}.png"
     file_path = os.path.join(save_dir, filename)
@@ -245,7 +245,8 @@ def shutdown_hook():
     shutdown = True
     fs = rospy.get_param("~fs", 33)
     plot_aligned_filtered_signal = rospy.get_param("~plot_aligned_filtered_signal", True)
-    plot_and_evaluate_signals(fs, plot_aligned_filtered_signal)
+    plots_dir = rospy.get_param("~plots_dir", "image_plots")
+    plot_and_evaluate_signals(fs, plot_aligned_filtered_signal, plots_dir)
     rospy.loginfo("Plot saved successfully.")
 
 
