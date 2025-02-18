@@ -1,5 +1,5 @@
 # Sensor Noise Filter
-This is a ROS package for sensor (gaussian) noise filtering. This package consists of different filters, e.g. moving average, exponential moving average, butterworth, and signal visualization tool.
+This is a ROS package for sensor (gaussian) noise filtering. This package consists of different filters (e.g. moving average, exponential moving average, butterworth) and signal visualization tool.
 
 ## Content
 1. [Moving Average (MA)](#moving-average-ma)
